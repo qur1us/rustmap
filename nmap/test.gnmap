@@ -1,4 +1,0 @@
-# Nmap 7.80 scan initiated Fri Sep 16 00:58:34 2022 as: nmap -sC -sV -oA nmap/test -p 22,25,631,3306 127.0.0.1
-Host: 127.0.0.1 (localhost)	Status: Up
-Host: 127.0.0.1 (localhost)	Ports: 22/open/tcp//ssh//OpenSSH 8.9p1 Ubuntu 3 (Ubuntu Linux; protocol 2.0)/, 25/open/tcp//smtp//Postfix smtpd/, 631/open/tcp//ipp//CUPS 2.4/, 3306/open/tcp//mysql//MySQL 5.5.5-10.6.7-MariaDB-2ubuntu1.1/
-# Nmap done at Fri Sep 16 00:58:41 2022 -- 1 IP address (1 host up) scanned in 6.45 seconds

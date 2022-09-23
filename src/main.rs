@@ -1,10 +1,11 @@
 use std::env;
-use std::net::{IpAddr,Ipv4Addr, SocketAddr};
+use std::net::{IpAddr,Ipv4Addr};
 use std::str::FromStr;
-use std::time::Duration;
-use async_std::net::{TcpStream};
-use std::process::{Command, Output};
-use std::io::Result;
+use std::process::exit;
+use scanner::{Target, Scanner};
+
+mod scanner;
+
 
 fn print_banner() {
     let banner: &'static str = "
@@ -17,72 +18,51 @@ _________________________________
     println!("{}", banner);
 }
 
-fn get_ports() -> Vec<u16> {
-    return (1..=65535).collect();
+fn print_help() -> String {
+    // TODO help message
+
+    return String::from("help me!");
 }
 
-async fn check_port(rhost: IpAddr, rport: u16, timeout: u64) {
-    let delay: Duration = Duration::from_secs(timeout);
-    let socket_address: SocketAddr = SocketAddr::new(rhost.clone(), rport);
-   
-    match tokio::time::timeout(delay, TcpStream::connect(&socket_address)).await {
-        Ok(Ok(_)) => {
-            println!("Port {} open.", rport);
-        }
-        _ => {}
-    }
-}
-
-async fn tcp_connect_scan(rhost: IpAddr) {
-    for port in get_ports().into_iter() {
-        check_port(rhost, port, 10).await;
-    }
-}
-
-fn run_nmap(rhost: IpAddr, machine_name: String) {
-    println!("Running script scan.");
-
-    Command::new("mkdir")
-                .arg("nmap")
-                .spawn()
-                .expect("Failed");
+fn parse_args(args: Vec<String>) -> (String, String) {
+    // TODO handle number of cmdline argumets
     
-    match Command::new("nmap")
-                    .arg("-sC")
-                    .arg("-sV")
-                    .arg("-oA")
-                    .arg(format!("nmap/{}", machine_name)) 
-                    .arg(rhost.to_string())
-                    .arg("-p")
-                    .arg("22,25,631,3306")
-                    .spawn() {
-        Ok(child) => {
-            let output: Result<Output> = child.wait_with_output();
-            println!("Nmap script scan finished.");
-        }
-        Err(_) => {
-            println!("Nmap script scan failed.");
-        }
+    if args.len() < 3 {
+        println!("{}", print_help());
+        exit(1);
     }
+    
+    return (args[1].clone(), args[2].clone());
 }
 
-#[tokio::main]
-async fn main() {
-    let args: Vec<String> = env::args().collect();
+fn main() {
 
-    let machine_name: String = args[2].clone();
+    let (ipv4_addr_str, target_name): (String, String) = parse_args(env::args().collect());
 
     print_banner();
+    
+    println!(
+        "Current working directory: {}\n",
+        env::current_dir()
+        .unwrap()
+        .display()
+    );
 
-    match Ipv4Addr::from_str(&args[1]) {
+    match Ipv4Addr::from_str(&ipv4_addr_str) {
+        
         Ok(ipv4_addr) => {
-            let rhost: IpAddr = IpAddr::V4(ipv4_addr);
 
-            tcp_connect_scan(rhost).await;
-            run_nmap(rhost, machine_name);
+            let rhost: IpAddr = IpAddr::V4(ipv4_addr);
+            let target: Target = Target::new(rhost, target_name, Vec::new());
+            let mut scanner: Scanner = Scanner::new(target, 3, Vec::new());
+            
+            let ports: Vec<u16> = scanner.get_ports();
+
+            for port in ports {
+                print!("{},", port);
+            }
         }
-        Err(_) => {
-            println!("The ip address is in a wrong format!");
-        }
+
+        Err(_) => println!("The ip address is in a wrong format!")
     }
 }

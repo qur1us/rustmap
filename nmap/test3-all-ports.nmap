@@ -1,0 +1,9 @@
+# Nmap 7.80 scan initiated Sat Sep 24 00:36:33 2022 as: nmap -sS -p- -oA ./nmap/test3-all-ports 192.168.220.128
+Nmap scan report for ubuntu (192.168.220.128)
+Host is up (0.0000010s latency).
+Not shown: 65533 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+25/tcp open  smtp
+
+# Nmap done at Sat Sep 24 00:36:34 2022 -- 1 IP address (1 host up) scanned in 0.34 seconds

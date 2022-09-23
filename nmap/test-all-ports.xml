@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.80 scan initiated Sat Sep 24 00:11:22 2022 as: nmap -sS -p- -oA ./nmap/test-all-ports 192.168.45.235 -->
+<nmaprun scanner="nmap" args="nmap -sS -p- -oA ./nmap/test-all-ports 192.168.45.235" start="1663971082" startstr="Sat Sep 24 00:11:22 2022" version="7.80" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
