@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.80 scan initiated Sat Sep 24 16:41:55 2022 as: nmap -sC -sV -oA nmap/test -p 22,25,631,3306 127.0.0.1 -->
+<nmaprun scanner="nmap" args="nmap -sC -sV -oA nmap/test -p 22,25,631,3306 127.0.0.1" start="1664030515" startstr="Sat Sep 24 16:41:55 2022" version="7.80" xmloutputversion="1.04">
+<scaninfo type="connect" protocol="tcp" numservices="4" services="22,25,631,3306"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1664030516" endtime="1664030522"><status state="up" reason="conn-refused" reason_ttl="0"/>
+<address addr="127.0.0.1" addrtype="ipv4"/>
+<hostnames>
+<hostname name="localhost" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="ssh" product="OpenSSH" version="8.9p1 Ubuntu 3" extrainfo="Ubuntu Linux; protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:8.9p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
+<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="smtp" product="Postfix smtpd" hostname=" ubuntu.localdomain" method="probed" conf="10"><cpe>cpe:/a:postfix:postfix</cpe></service><script id="smtp-commands" output="ubuntu.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING, "/><script id="ssl-cert" output="Subject: commonName=ubuntu&#xa;Subject Alternative Name: DNS:ubuntu&#xa;Not valid before: 2022-07-31T15:39:46&#xa;Not valid after:  2032-07-28T15:39:46"><table key="subject">
+<elem key="commonName">ubuntu</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">ubuntu</elem>
+</table>
+<table key="pubkey">
+<elem key="exponent">BIGNUM: 0x55c202d074e8</elem>
+<elem key="modulus">BIGNUM: 0x55c202d07568</elem>
+<elem key="bits">2048</elem>
+<elem key="type">rsa</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:ubuntu</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">5F:D7:F7:AF:45:29:59:89:B9:F4:47:D5:EE:B1:01:67:B2:0E:2D:58</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notAfter">2032-07-28T15:39:46</elem>
+<elem key="notBefore">2022-07-31T15:39:46</elem>
+</table>
+<elem key="md5">115b66ab184e277ca1de6c7b7ea5e604</elem>
+<elem key="sha1">5345a4d0eba3006c591b7945ad7bcf8da58d6aea</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC7zCCAdegAwIBAgIUMzRz8CRSlBcA/CBK0wQ56KY0OGwwDQYJKoZIhvcNAQEL&#xa;BQAwETEPMA0GA1UEAwwGdWJ1bnR1MB4XDTIyMDczMTE1Mzk0NloXDTMyMDcyODE1&#xa;Mzk0NlowETEPMA0GA1UEAwwGdWJ1bnR1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A&#xa;MIIBCgKCAQEAhksX7KPd1Z9C0pvy47G7XFvHz+PicTvxKrGfffI6Yh+Nj8hOHGGc&#xa;L4o/WZQOiZRXLLTXEARQnSlJDwn5Adic4gqZdBhDqZlZzTZUv2BA4MX7sJzGVZox&#xa;9OVgkvpqE3pXI+FH2tjWb18KMu9PyZXrG5nEoW9gRQBOb+DnILifa+YnSWqQbCIL&#xa;E0A3dQGLlQ4huxpR7cOPUwqp+e4IRCK/vohj33snA80tNq+FGYkxUKRDJDfCCz+r&#xa;/YJ3SHwjtS1eZqxktzqBgKdXVKSFkMDGv+U6qT7yY6sqW8dCeUcodSAMkVq1tCCy&#xa;1x070qwfwT1WVTS7eGGrzBwNjsPt73wwPwIDAQABoz8wPTAJBgNVHRMEAjAAMBEG&#xa;A1UdEQQKMAiCBnVidW50dTAdBgNVHQ4EFgQUX9f3r0UpWYm59EfV7rEBZ7IOLVgw&#xa;DQYJKoZIhvcNAQELBQADggEBAFgwmLYuKNlXRZ7B0hleDItuIF2+STgTo2ZYIAtI&#xa;L+flCji0r9qW+3ZdatWjVy4SBmI5aGkdlaAbp1oPnoGgtreFdEQclL4bxk3My/kU&#xa;KwlcWmGkm9/d8PEAC4N1JMdDYafaH62ysnu4VZCLNhtT8mmb7oXDiy0BkYXOItRs&#xa;n4qdOBjh/zqJhfeT4TlvkvglU/8NrZoUyAeRJmgv4hRY4eEUg+dTxM+8j9EZlimB&#xa;QtrwvmfE2yVhspWDmU2lcCworvVlMAY3YP+nxwb2lB6EEoDqLNDW3TzLJdAnTjqr&#xa;csNk5qeq0GI9lLJPDCORZjGQacrB2Kro8vATzejnKJhm2eM=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="ssl-date" output="TLS randomness does not represent time"></script></port>
+<port protocol="tcp" portid="631"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="ipp" product="CUPS" version="2.4" method="probed" conf="10"><cpe>cpe:/a:apple:cups:2.4</cpe></service><script id="http-robots.txt" output="1 disallowed entry &#xa;/"/><script id="http-server-header" output="CUPS/2.4 IPP/2.1"><elem>CUPS/2.4 IPP/2.1</elem>
+</script><script id="http-title" output="Home - CUPS 2.4.1"><elem key="title">Home - CUPS 2.4.1</elem>
+</script></port>
+<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="mysql" product="MySQL" version="5.5.5-10.6.7-MariaDB-2ubuntu1.1" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql:5.5.5-10.6.7-mariadb-2ubuntu1.1</cpe></service><script id="mysql-info" output="&#xa;  Protocol: 10&#xa;  Version: 5.5.5-10.6.7-MariaDB-2ubuntu1.1&#xa;  Thread ID: 60&#xa;  Capabilities flags: 63486&#xa;  Some Capabilities: Support41Auth, Speaks41ProtocolOld, SupportsTransactions, IgnoreSigpipes, InteractiveClient, SupportsLoadDataLocal, Speaks41ProtocolNew, DontAllowDatabaseTableColumn, ODBCClient, SupportsCompression, FoundRows, IgnoreSpaceBeforeParenthesis, LongColumnFlag, ConnectWithDatabase, SupportsMultipleStatments, SupportsAuthPlugins, SupportsMultipleResults&#xa;  Status: Autocommit&#xa;  Salt: OMt&quot;J.DM7h(.Mv0&amp;mu$O&#xa;  Auth Plugin Name: mysql_native_password"><elem key="Protocol">10</elem>
+<elem key="Version">5.5.5-10.6.7-MariaDB-2ubuntu1.1</elem>
+<elem key="Thread ID">60</elem>
+<elem key="Capabilities flags">63486</elem>
+<table key="Some Capabilities">
+<elem>Support41Auth</elem>
+<elem>Speaks41ProtocolOld</elem>
+<elem>SupportsTransactions</elem>
+<elem>IgnoreSigpipes</elem>
+<elem>InteractiveClient</elem>
+<elem>SupportsLoadDataLocal</elem>
+<elem>Speaks41ProtocolNew</elem>
+<elem>DontAllowDatabaseTableColumn</elem>
+<elem>ODBCClient</elem>
+<elem>SupportsCompression</elem>
+<elem>FoundRows</elem>
+<elem>IgnoreSpaceBeforeParenthesis</elem>
+<elem>LongColumnFlag</elem>
+<elem>ConnectWithDatabase</elem>
+<elem>SupportsMultipleStatments</elem>
+<elem>SupportsAuthPlugins</elem>
+<elem>SupportsMultipleResults</elem>
+</table>
+<elem key="Status">Autocommit</elem>
+<elem key="Salt">OMt&quot;J.DM7h(.Mv0&amp;mu$O</elem>
+<elem key="Auth Plugin Name">mysql_native_password</elem>
+</script></port>
+</ports>
+<times srtt="97" rttvar="1640" to="100000"/>
+</host>
+<runstats><finished time="1664030522" timestr="Sat Sep 24 16:42:02 2022" elapsed="6.39" summary="Nmap done at Sat Sep 24 16:42:02 2022; 1 IP address (1 host up) scanned in 6.39 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

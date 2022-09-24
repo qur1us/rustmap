@@ -1,0 +1,11 @@
+# Nmap 7.80 scan initiated Sat Sep 24 16:41:55 2022 as: nmap -sS -p- -T3 -oA ./nmap/test-all-ports 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000010s latency).
+Not shown: 65531 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+25/tcp   open  smtp
+631/tcp  open  ipp
+3306/tcp open  mysql
+
+# Nmap done at Sat Sep 24 16:41:55 2022 -- 1 IP address (1 host up) scanned in 0.35 seconds
