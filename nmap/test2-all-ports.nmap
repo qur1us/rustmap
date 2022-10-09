@@ -1,0 +1,18 @@
+# Nmap 7.80 scan initiated Sun Oct  9 13:20:32 2022 as: nmap -sS -p- -oA ./nmap/test2-all-ports 127.0.0.1     
+Failed to resolve "".
+Failed to resolve "".
+Failed to resolve "".
+Failed to resolve "".
+Failed to resolve "".
+Failed to resolve "".
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Not shown: 65531 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+25/tcp   open  smtp
+631/tcp  open  ipp
+3306/tcp open  mysql
+
+Failed to resolve "".
+# Nmap done at Sun Oct  9 13:20:33 2022 -- 1 IP address (1 host up) scanned in 0.42 seconds

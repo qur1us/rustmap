@@ -1,13 +1,12 @@
-use std::net::{IpAddr, SocketAddr};
+use std::net::{IpAddr};
 use std::io::{BufReader, BufRead};
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::fs::{File, self};
-use std::time::Duration;
-use async_std::net::TcpStream;
-use futures::{stream, StreamExt};
+// use std::time::Duration;
+// use async_std::net::TcpStream;
+// use futures::{stream, StreamExt};
 
-pub enum Options {}
 
 pub struct Target {
     ip_addr: IpAddr,
@@ -17,8 +16,7 @@ pub struct Target {
 
 pub struct Scanner {
     target: Target,
-    speed: u8,
-    options: Vec<Options>
+    nmap_flags: Vec<String>,
 }
 
 impl Target {
@@ -44,24 +42,15 @@ impl Target {
 }
 
 impl Scanner {
-    pub fn new(target: Target, speed: u8, options: Vec<Options>) -> Scanner {
+    pub fn new(target: Target, nmap_flags: Vec<String>) -> Scanner {
         Scanner {
             target,
-            speed,
-            options
+            nmap_flags
         }
     }
 
     pub fn target(&self) -> &Target {
         &self.target
-    }
-
-    pub fn speed(&self) -> &u8 {
-        &self.speed
-    }
-
-    pub fn options(&self) -> &Vec<Options> {
-        &self.options
     }
 
     pub fn target_info(&self) -> String {
@@ -89,7 +78,7 @@ impl Scanner {
             
             Ok(file) => {
 
-                println!("[*] Parsing the namp full-port scan output.");
+                println!("\n\n[*] Parsing the namp full-port scan output.");
                 
                 let lines = BufReader::new(&file).lines();
 
@@ -127,23 +116,55 @@ impl Scanner {
         let outfile: String = format!("./nmap/{}{}", &self.target().name(), "-all-ports");
         let path_str: String = format!("{}{}", &outfile, ".nmap");
 
+        let mut speed_flag = "";
+        let mut min_rate_flag = "";
+        let mut min_rate_flag_value = "";
+        let mut verbose_flag = "";
+        let mut ping_flag = "";
+
+        for i in 0..self.nmap_flags.len() {
+
+            if self.nmap_flags[i].contains("-T") {
+                speed_flag = &self.nmap_flags[i];
+            }
+    
+            if self.nmap_flags[i] == "--min-rate" {
+                min_rate_flag = "--min-rate";
+                min_rate_flag_value = "10000";
+            }
+    
+            if self.nmap_flags[i] == "-v" {
+                verbose_flag = "-v";
+            }
+    
+            if self.nmap_flags[i] == "-Pn" {
+                ping_flag = "-Pn"
+            }
+        }
+
+        println!("\n");
+
         match fs::create_dir_all("./nmap") {
             Ok(_) => println!("[+] Created nmap directory"),
             Err(_) => {}
         }
 
-        println!("[*] Running full-port scan.");
+        println!("[*] Running full-port scan.\n\n");
         
         // Run nmap SYN scan on all ports
         match Command::new("sudo")
-                        .stdout(Stdio::null()) 
+                        .stderr(Stdio::null())
                         .arg("nmap")
                         .arg("-sS")
                         .arg("-p-")
-                        .arg(format!("-T{}", self.speed()))
                         .arg("-oA")
                         .arg(&outfile) 
                         .arg(&self.target().ip().to_string())
+                        .arg(&speed_flag)
+                        .arg(&min_rate_flag)
+                        .arg(&min_rate_flag_value)
+                        .arg(&verbose_flag)
+                        .arg(&ping_flag)
                         .spawn() {
             Ok(child) => {
                 
@@ -197,23 +218,23 @@ impl Scanner {
 
         println!("\n[+] Scanning of the target machine ({}) finished.\n", self.target().ip());
     }
-
-    async fn check_port(&self, rhost: IpAddr, rport: u16, timeout: u64) {
-
-        let delay: Duration = Duration::from_secs(timeout);
-        let socket_address: SocketAddr = SocketAddr::new(rhost.clone(), rport);
-
-
-        match tokio::time::timeout(delay, TcpStream::connect(&socket_address)).await {
-            Ok(Ok(_)) => println!("Port {} open.", rport),
-            _ => {}
-        }
-    }
-
-    pub async fn tcp_connect_scan(&self, rhost: IpAddr) {
-
-        stream::iter(1..65535).for_each_concurrent(1000, |port| async move {
-                self.check_port(rhost, port, 10).await;
-        }).await;
-    }
 }
+//     async fn check_port(&self, rhost: IpAddr, rport: u16, timeout: u64) {
+
+//         let delay: Duration = Duration::from_secs(timeout);
+//         let socket_address: SocketAddr = SocketAddr::new(rhost.clone(), rport);
+
+
+//         match tokio::time::timeout(delay, TcpStream::connect(&socket_address)).await {
+//             Ok(Ok(_)) => println!("Port {} open.", rport),
+//             _ => {}
+//         }
+//     }
+
+//     pub async fn tcp_connect_scan(&self, rhost: IpAddr) {
+
+//         stream::iter(1..65535).for_each_concurrent(1000, |port| async move {
+//                 self.check_port(rhost, port, 10).await;
+//         }).await;
+//     }
+// }
