@@ -186,6 +186,7 @@ impl Scanner {
                         .arg("-sC")
                         .arg("-sV")
                         .arg("-oA")
+                        .arg("-Pn")
                         .arg(format!("nmap/{}", self.target().name())) 
                         .arg(self.target().ip().to_string())
                         .arg("-p")
