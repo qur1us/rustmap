@@ -15,6 +15,7 @@ _________________________________
 pub fn print_help() -> &'static str {
 
     let help_msg: &'static str = "
+rustmap <IP ADDRESS> <MACHINE NAME> <OPTIONS>
 
 -h                      This help message.
 --speed <number 1-5>    Speed of nmap port scan.
