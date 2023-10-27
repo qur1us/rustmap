@@ -186,11 +186,11 @@ impl Scanner {
                         .arg("-sC")
                         .arg("-sV")
                         .arg("-oA")
-                        .arg("-Pn")
                         .arg(format!("nmap/{}", self.target().name())) 
                         .arg(self.target().ip().to_string())
                         .arg("-p")
                         .arg(self.target().open_ports())
+                        .arg("-Pn")
                         .spawn() {
             Ok(child) => {
                 _ = child.wait_with_output(); // let output: Result<Output> if I want to do sth with it later
