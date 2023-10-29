@@ -4,8 +4,9 @@ Simple [Nmap](https://nmap.org/) wrapper in Rust.
 Compilation:
 
 ```bash
+cd ./rustmap
 cargo build --release
-ln -s <PATH TO PROJECT>/rustmap/target/release/rustmap /usr/bin/rustmap
+ln -s $(pwd)/target/release/rustmap /usr/bin/rustmap
 ```
 
 Usage:
